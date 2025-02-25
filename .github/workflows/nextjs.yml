@@ -57,7 +57,7 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
-        run: next build && next export -o docs && npm run publishsitemap && touch docs/.nojekyll
+        run: npx next build && npx next export -o docs && npm run publishsitemap && touch docs/.nojekyll
       - name: Start Application (Linux)
         run: NODE_OPTIONS=--openssl-legacy-provider npm run start
         if: runner.os == 'Linux'
