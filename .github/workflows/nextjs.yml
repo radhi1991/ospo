@@ -58,6 +58,12 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: next build && next export -o docs && npm run publishsitemap && touch docs/.nojekyll
+      - name: Start Application (Linux)
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run start
+        if: runner.os == 'Linux'
+      - name: Start Application (Windows)
+        run: set NODE_OPTIONS=--openssl-legacy-provider && npm run start
+        if: runner.os == 'Windows'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
